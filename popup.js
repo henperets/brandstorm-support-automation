@@ -934,7 +934,7 @@
             if (anyMsg && anyMsg.textContent.trim().length >= 6) return anyMsg.textContent.trim();
 
             // Strategy 3: dialog content changed after API returned - look for a
-            // token (no spaces, 6–80 chars) that isn't a known button label
+            // token (no spaces, 6-80 chars) that isn't a known button label
             const dialog = document.querySelector('.add-new-dialog-card, .q-dialog .q-card__section:not(.q-card__actions)');
             if (dialog) {
               const walker = document.createTreeWalker(dialog, NodeFilter.SHOW_TEXT);

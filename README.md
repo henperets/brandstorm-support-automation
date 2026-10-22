@@ -1,5 +1,7 @@
 # Brandstorm
 
+[![CI](https://github.com/henperets/brandstorm-support-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/henperets/brandstorm-support-automation/actions/workflows/ci.yml)
+
 **A Manifest V3 Chrome extension that automates repetitive internal support workflows, including clean-session brand access, credential rotation, and secure one-time credential sharing, with zero backend, zero build step, and zero third-party dependencies.**
 
 > Built by Hen Perets as an internal productivity tool, and shared here as a portfolio piece demonstrating browser-extension architecture, browser-automation engineering, and pragmatic security design.
@@ -107,6 +109,7 @@ Full write-up, including one deliberately-accepted, clearly-labeled limitation, 
 ├── content/content-script.js    # Content script on the internal admin console
 ├── brands.js                    # Brand registry (curated + auto-generated + custom entries)
 ├── icons/                       # Extension icons
+├── .github/workflows/ci.yml     # CI: JS syntax check + manifest validation
 ├── ARCHITECTURE.md              # Full technical deep-dive
 └── DEVLOG.md                    # Internal development log
 ```
@@ -114,3 +117,13 @@ Full write-up, including one deliberately-accepted, clearly-labeled limitation, 
 ---
 
 For the full architecture, workflow trace, design decisions, security considerations, and lessons learned, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
+---
+
+## Copyright & Usage Notice
+
+Copyright © 2026 Hen Perets. All rights reserved.
+
+This repository is a read-only portfolio piece. It documents an internal tool built for my employer's systems and is shared only to demonstrate engineering concepts and design decisions. It is not open source, and no license is granted to use, copy, modify, distribute, or build upon this code or documentation, in whole or in part, without prior written permission.
+
+All company names, domains, and customer data in this repository are fictional placeholders. Any resemblance to real organizations is coincidental. Viewing the code and cloning it for personal reading is welcome. For any other use, please get in touch first.

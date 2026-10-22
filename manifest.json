@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Brandstorm",
   "version": "1.0",
-  "description": "Quick access to internal brand URLs – copy or open in incognito",
+  "description": "Automates clean-session brand access and credential reset for support workflows",
   "permissions": ["windows", "tabs", "clipboardWrite", "storage", "cookies", "scripting"],
   "host_permissions": ["*://*.nimbus.example/*"],
   "content_scripts": [

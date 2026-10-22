@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check JavaScript syntax
+        run: |
+          for f in *.js content/*.js; do
+            echo "checking $f"
+            node --check "$f"
+          done
+
+      - name: Validate manifest.json and referenced files
+        run: |
+          node -e "
+            const fs = require('fs');
+            const m = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
+            if (m.manifest_version !== 3) throw new Error('manifest_version must be 3');
+            const files = [
+              m.background && m.background.service_worker,
+              m.action && m.action.default_popup,
+              ...Object.values(m.icons || {}),
+              ...Object.values((m.action && m.action.default_icon) || {}),
+              ...(m.content_scripts || []).flatMap(c => c.js || []),
+            ].filter(Boolean);
+            const missing = files.filter(f => !fs.existsSync(f));
+            if (missing.length) throw new Error('Missing files: ' + missing.join(', '));
+            console.log('manifest ok, ' + files.length + ' referenced files present');
+          "

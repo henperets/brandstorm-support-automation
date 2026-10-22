@@ -25,7 +25,7 @@ Brandstorm is a Chrome extension that gives quick access to brand URLs, letting 
 
 ---
 
-## Phase 2: Super Extension Integration ("Reset User Pass")
+## Phase 2: Admin Console Integration ("Reset User Pass")
 
 **What was built:**
 - A **"Reset User Pass"** button added to every brand row in the popup
@@ -36,7 +36,7 @@ Brandstorm is a Chrome extension that gives quick access to brand URLs, letting 
 **Technical challenges:**
 - The admin site uses **Quasar + Vue 3**, so standard DOM clicks don't trigger Vue reactivity. Two-step click simulation was required: trigger a Vue synthetic click event, wait for the dialog to mount, click confirm
 - Password extraction polls the DOM for Quasar positive-notification banners or dialog content text
-- A `content/content-script.js` was added (mirror of the original Super extension) to handle `PING`, `SEARCH_BRAND`, and `TRIGGER_RESET` messages from the popup, with an origin guard for `admin.nimbus.example`
+- A `content/content-script.js` was added (a content script that drives the admin console) to handle `PING`, `SEARCH_BRAND`, and `TRIGGER_RESET` messages from the popup, with an origin guard for `admin.nimbus.example`
 - `background.js` gained `FIND_OR_NAVIGATE_ADMIN_TAB` handler: finds an existing admin tab or creates one
 
 ---
