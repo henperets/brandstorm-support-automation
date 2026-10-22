@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandstorm</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">Brandstorm</span>
+        </div>
+        <div class="subtitle">Brand Launcher</div>
+      </div>
+      <div class="header-actions">
+        <button id="openTabBtn" class="header-icon-btn" title="Open as tab">↗</button>
+        <button id="addBrandBtn" class="add-brand-btn" title="Add new brand">+</button>
+      </div>
+    </div>
+
+    <!-- Add Brand Form (hidden by default) -->
+    <div id="addBrandForm" class="add-brand-form hidden">
+      <input
+        type="text"
+        id="newBrandInput"
+        class="add-brand-input"
+        placeholder="brand-name (e.g. my-client)"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <div class="add-brand-actions">
+        <button id="confirmAddBtn" class="btn btn-add-confirm">Add</button>
+        <button id="cancelAddBtn" class="btn btn-add-cancel">Cancel</button>
+      </div>
+    </div>
+
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Search brands…"
+        autofocus
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button class="clear-btn hidden" id="clearBtn" title="Clear search">✕</button>
+    </div>
+
+    <div id="brandList" class="brand-list"></div>
+
+    <div id="emptyState" class="empty-state hidden">
+      <div class="empty-icon">🔎</div>
+      <div class="empty-text">No brands found</div>
+      <div class="empty-hint">Try a different search term</div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <div class="footer-credit">Made by Hen Perets</div>
+  </div>
+
+  <!-- ── Reset Modal Overlay ───────────────────────────────────────── -->
+  <div id="resetModal" class="reset-modal hidden">
+    <div class="reset-modal-card">
+
+      <!-- loading -->
+      <div id="rm-loading" class="rm-state">
+        <p class="rm-status" id="rm-status-text">Locating brand...</p>
+        <div class="rm-spinner" aria-label="Working" role="status"></div>
+      </div>
+
+      <!-- recipient email entry (for the "Reset password for…" flow) -->
+      <div id="rm-email" class="rm-state hidden">
+        <h3 class="rm-title rm-title-warn">Reset Password For Someone</h3>
+        <p class="rm-body">Send a one-time password reset link for:</p>
+        <div id="rm-email-brand-name" class="rm-brand-display"></div>
+        <label class="rm-label" for="rm-email-input">Recipient email</label>
+        <input type="email" id="rm-email-input" class="rm-input" placeholder="e.g. test.t@nimbus.example" autocomplete="off" spellcheck="false" />
+        <p id="rm-email-error" class="rm-warn-text"></p>
+        <div class="rm-actions">
+          <button id="rm-btn-email-continue" class="btn rm-btn-danger">Continue</button>
+          <button id="rm-btn-email-cancel" class="btn rm-btn-sec">Cancel</button>
+        </div>
+      </div>
+
+      <!-- confirm -->
+      <div id="rm-confirm" class="rm-state hidden">
+        <h3 class="rm-title rm-title-warn" id="rm-confirm-title">Confirm Reset</h3>
+        <p class="rm-body" id="rm-confirm-body">Reset the user password for:</p>
+        <div id="rm-brand-name" class="rm-brand-display"></div>
+        <p class="rm-warn-text" id="rm-confirm-note">This is <strong>irreversible</strong>. Proceed only if authorized.</p>
+        <div class="rm-actions">
+          <button id="rm-btn-confirm" class="btn rm-btn-danger">Proceed</button>
+          <button id="rm-btn-cancel" class="btn rm-btn-sec">Cancel</button>
+        </div>
+      </div>
+
+      <!-- executing -->
+      <div id="rm-executing" class="rm-state hidden">
+        <p class="rm-status" id="rm-exec-status">Executing reset...</p>
+        <div class="rm-spinner" aria-label="Executing" role="status"></div>
+        <p class="rm-note">Do not close this window.</p>
+      </div>
+
+      <!-- done -->
+      <div id="rm-done" class="rm-state hidden">
+        <h3 class="rm-title rm-title-success" id="rm-done-title">Reset Dispatched</h3>
+        <p class="rm-body" id="rm-done-body">Password reset sent successfully.</p>
+        <p class="rm-note" id="rm-done-note">View the new password on the admin page.</p>
+        <button id="rm-btn-done" class="btn rm-btn-sec">View Admin Page</button>
+      </div>
+
+      <!-- server error -->
+      <div id="rm-server-error" class="rm-state hidden">
+        <h3 class="rm-title rm-title-warn">Server Error</h3>
+        <p class="rm-warn-text">The server returned a 500 error. No password was changed. Refresh the admin page and try again.</p>
+        <button id="rm-btn-server-retry" class="btn rm-btn-sec">Close</button>
+      </div>
+
+      <!-- general error -->
+      <div id="rm-error" class="rm-state hidden">
+        <h3 class="rm-title rm-title-error">Failed</h3>
+        <p id="rm-error-msg" class="rm-error-box" role="alert"></p>
+        <button id="rm-btn-retry" class="btn rm-btn-sec">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="brands.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

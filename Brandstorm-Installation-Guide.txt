@@ -1,0 +1,13 @@
+Install the Brandstorm Extension
+
+1. Open Chrome and go to chrome://extensions/
+2. Enable Developer mode (top right)
+3. Click Load unpacked
+4. Navigate to the folder where you cloned/downloaded this repository
+5. Select the folder and click Open
+
+Enable Incognito Mode
+
+1. In chrome://extensions/, find Brandstorm
+2. Click Details
+3. Turn on Allow in Incognito
